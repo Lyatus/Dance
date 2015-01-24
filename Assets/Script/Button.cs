@@ -27,6 +27,7 @@ public class Button : MonoBehaviour {
 		StartCoroutine(disappearCoroutine());
 	}
 	IEnumerator disappearCoroutine(){
+		GetComponent<AudioSource>().Play();
 		GetComponent<SpriteRenderer>().sprite = ButtonMap.spriteForPoof();
 		yield return new WaitForSeconds(poofDelay);
 		Destroy(gameObject);

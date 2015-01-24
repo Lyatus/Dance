@@ -25,7 +25,6 @@ public class ButtonZone : MonoBehaviour {
 								button.success();
 							buttons.Clear();
 						}
-						else GetComponent<AudioSource>().Play();
 					}
 					
 	}

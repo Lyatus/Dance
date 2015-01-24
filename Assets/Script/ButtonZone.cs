@@ -13,9 +13,8 @@ public class ButtonZone : MonoBehaviour {
 					if(Input.GetKeyDown(ButtonMap.keyForButton(i+"_"+j))){
 						HashSet<Button> buttons = getCurrentButtons(i+"_"+j);
 						if(buttons!=null && buttons.Count>0){
-							foreach(Button button in buttons){
+							foreach(Button button in buttons)
 								button.success();
-							}
 							buttons.Clear();
 						}
 						else GetComponent<AudioSource>().Play();

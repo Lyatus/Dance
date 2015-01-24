@@ -8,7 +8,6 @@ using System.Collections;
 public class Button : MonoBehaviour {
 	public float disappearDelay;
 	public Sprite poofSprite;
-	public Sprite failSprite;
 	public float failDistance;
 
 	private string buttonName;
@@ -17,7 +16,7 @@ public class Button : MonoBehaviour {
 	void Update(){
 		if(speed.x<0 &&transform.position.x<-failDistance
 	   	|| speed.x>0 && transform.position.x>failDistance)
-			disappear(failSprite);
+			failure();
 	   	transform.position += speed * Time.deltaTime;
 	}
 	public void init(string buttonName, Vector3 speed){
@@ -30,17 +29,22 @@ public class Button : MonoBehaviour {
 		return buttonName;
 	}
 	public void success(){
-		disappear(poofSprite);
+		StartCoroutine(successCoroutine());
+	}
+	IEnumerator successCoroutine(){
+		GetComponent<AudioSource>().Play();
+		for(int i=1;i<=4;i++){
+			transform.localScale = new Vector3(1f+i*.1f,1f+i*.1f,1f);
+			yield return 0;
+		}
+		Destroy(gameObject);
+		yield break;
 	}
 	public void failure(){
-		disappear(failSprite);
+		StartCoroutine(failureCoroutine());
 	}
-	void disappear(Sprite sprite){
-		StartCoroutine(disappearCoroutine(sprite));
-	}
-	IEnumerator disappearCoroutine(Sprite sprite){
-		GetComponent<AudioSource>().Play();
-		GetComponent<SpriteRenderer>().sprite = sprite;
+	IEnumerator failureCoroutine(){
+		GetComponent<SpriteRenderer>().sprite = poofSprite;
 		yield return new WaitForSeconds(disappearDelay);
 		Destroy(gameObject);
 		yield break;
@@ -50,5 +54,8 @@ public class Button : MonoBehaviour {
 	}
 	public void unhighlight(){
 		GetComponent<SpriteRenderer>().color = Color.gray;
+	}
+	public int getPlayerId(){
+		return (transform.localPosition.y>0)?0:1;
 	}
 }

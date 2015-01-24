@@ -7,6 +7,7 @@ public class ButtonManager : MonoBehaviour {
 	public float zoneDistance;
 	public float correctMappingModifier;
 	public float correctMappingProb;
+	public float lineYOffset;
 	
 	void Start(){
 		StartCoroutine(correctMappingCoroutine());
@@ -24,7 +25,7 @@ public class ButtonManager : MonoBehaviour {
 		button.transform.localPosition = position;
 	}
 	public void beat(float delay){
-		Vector3 position = new Vector3(zoneDistance+delay*this.speed,-.5f,0);
+		Vector3 position = new Vector3(zoneDistance+delay*this.speed,-lineYOffset,0);
 		Vector3 speed = new Vector3(-this.speed,0,0);
 		string buttonName;
 		

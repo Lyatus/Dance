@@ -4,13 +4,19 @@ using System.Collections;
 
 public class SuicideManager : MonoBehaviour {
 
-	private Image[] listSuicide;
+	private GameObject[] listSuicide = new GameObject[7];
 
 	private int etatSuicide = 0;
 
 	// Use this for initialization
 	void Start () {
-		listSuicide = this.GetComponentsInChildren<Image> ();
+		listSuicide[0] = GameObject.Find("imgSuicideMinus3");
+		listSuicide[1] = GameObject.Find("imgSuicideMinus2");
+		listSuicide[2] = GameObject.Find("imgSuicideMinus1");
+		listSuicide[3] = GameObject.Find("imgSuicideIdle");
+		listSuicide[4] = GameObject.Find("imgSuicidePlus1");
+		listSuicide[5] = GameObject.Find("imgSuicidePlus2");
+		listSuicide[6] = GameObject.Find("imgSuicidePlus3");
 		displaySuicideStats ();
 	}
 
@@ -31,34 +37,9 @@ public class SuicideManager : MonoBehaviour {
 	}
 
 	void displaySuicideStats(){
-
-		for (int i=0; i<listSuicide.Length; i++) {
-			listSuicide[i].enabled = false;
-				}
-
-		switch (etatSuicide) {
-		case -3 : searchSuicide("imgSuicideMinus3").enabled = true;
-			break;
-		case -2 : searchSuicide("imgSuicideMinus2").enabled = true;
-			break;
-		case -1 : searchSuicide("imgSuicideMinus1").enabled = true;
-			break;
-		case 0 : searchSuicide("imgSuicideIdle").enabled = true;
-			break; 
-		case 1 : searchSuicide("imgSuicidePlus1").enabled = true;
-			break;
-		case 2 : searchSuicide("imgSuicidePlus2").enabled = true;
-			break;
-		case 3 : searchSuicide("imgSuicidePlus3").enabled = true;
-			break;
-		}
-	}
-
-	Image searchSuicide(string name){
-		for (int i=0; i<listSuicide.Length; i++) {
-			if(name == listSuicide[i].name)
-				return listSuicide[i];
-				}
-		return null;
+		foreach(GameObject go in listSuicide)
+			go.SetActive(false);
+		if(etatSuicide>=-3 && etatSuicide<=3)
+			listSuicide[3+etatSuicide].SetActive(true);
 	}
 }

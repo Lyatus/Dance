@@ -6,7 +6,7 @@ public class BeatFinder : MonoBehaviour {
 	public ButtonManager bm;
 	public int qSamples = 1024;
 	public float bias = 0.02f; //mini Amplitude to extract pitch
-	public float delay = 2f;
+	public float delay = 0f;
 	public int selectedPitch = 120;
 
 	public float timeBetweenKey = 0.2f;
@@ -45,6 +45,14 @@ public class BeatFinder : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if (Time.timeScale == 0 && musicBeater.isPlaying) {
+						musicBeater.Pause ();
+						musicReader.Pause ();
+		} else if(Time.timeScale >0 && !musicBeater.isPlaying){
+			musicBeater.Play();
+			musicReader.Play ();
+				}
+
 		musicBeater.GetSpectrumData (samplesL, 0, FFTWindow.BlackmanHarris);
 		musicBeater.GetSpectrumData (samplesR, 1, FFTWindow.BlackmanHarris);
 
@@ -75,7 +83,8 @@ public class BeatFinder : MonoBehaviour {
 		//Debug.Log (timeBeforeKey+" "+Time.time);
 
 		if (timeBeforeKey < Time.time && pitchValue > selectedPitch) {
-			bm.beat(delay);
+			//bm.beat(delay);
+			Debug.Log("ping");
 			timeBeforeKey = Time.time + timeBetweenKey;
 				}
 

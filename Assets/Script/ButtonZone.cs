@@ -9,7 +9,7 @@ public class ButtonZone : MonoBehaviour {
 	void Update () {
 		for(int i=1;i<=2;i++)
 			for(int j=1;j<=9;j++)
-				if(Input.GetButtonDown(i+"_"+j)){
+				if(Input.GetKeyDown(ButtonMap.keyForButton(i+"_"+j))){
 					GameObject button;
 					if(currentButtons.TryGetValue(i+"_"+j,out button)){
 						Destroy(button);

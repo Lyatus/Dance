@@ -3,17 +3,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public static class ButtonMap {
+public static class ButtonMap {		
 	static private SortedDictionary<string,string> buttonKeys = new SortedDictionary<string, string>();
 	static ButtonMap(){
-		buttonKeys.Add("1_1","w");
+		bool qwerty = KeyboardLayout.isQwerty();
+		if(qwerty) Debug.Log("QWERTY");
+		buttonKeys.Add("1_1",(qwerty)?"z":"w");
 		buttonKeys.Add("1_2","x");
 		buttonKeys.Add("1_3","c");
 		buttonKeys.Add("1_4","q");
 		buttonKeys.Add("1_5","s");
 		buttonKeys.Add("1_6","d");
 		buttonKeys.Add("1_7","a");
-		buttonKeys.Add("1_8","z");
+		buttonKeys.Add("1_8",(qwerty)?"w":"z");
 		buttonKeys.Add("1_9","e");
 		buttonKeys.Add("2_1","v");
 		buttonKeys.Add("2_2","b");
@@ -25,7 +27,7 @@ public static class ButtonMap {
 		buttonKeys.Add("2_8","t");
 		buttonKeys.Add("2_9","y");
 	}
-	static string keyForButton(string button){
+	public static string keyForButton(string button){
 		string wtr;
 		if(buttonKeys.TryGetValue(button,out wtr))
 			return wtr;

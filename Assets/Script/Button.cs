@@ -18,6 +18,7 @@ public class Button : MonoBehaviour {
 		this.buttonName = buttonName;
 		this.speed = speed;
 		GetComponent<SpriteRenderer>().sprite = ButtonMap.spriteForButton(buttonName);
+		unhighlight();
 	}
 	public string getButtonName(){
 		return buttonName;
@@ -30,5 +31,11 @@ public class Button : MonoBehaviour {
 		yield return new WaitForSeconds(poofDelay);
 		Destroy(gameObject);
 		yield break;
+	}
+	public void highlight(){
+		GetComponent<SpriteRenderer>().color = Color.white;
+	}
+	public void unhighlight(){
+		GetComponent<SpriteRenderer>().color = Color.gray;
 	}
 }

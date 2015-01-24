@@ -24,13 +24,17 @@ public class ButtonZone : MonoBehaviour {
 	}
 	void OnTriggerEnter2D(Collider2D c){
 		Button button = c.gameObject.GetComponent<Button>();
-		if(button != null) // A button is entering the button zone
+		if(button != null){ // A button is entering the button zone
+			button.highlight();
 			getCurrentButtons(button.getButtonName()).Add(button);
+		}
 	}
 	void OnTriggerExit2D(Collider2D c){
 		Button button = c.gameObject.GetComponent<Button>();
-		if(button != null) // A button is exiting the button zone
+		if(button != null){ // A button is exiting the button zone
+			button.unhighlight();
 			getCurrentButtons(button.getButtonName()).Clear();
+		}
 	}
 	HashSet<Button> getCurrentButtons(string name){
 		HashSet<Button> buttons;

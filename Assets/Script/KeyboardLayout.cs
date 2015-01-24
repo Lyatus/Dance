@@ -13,28 +13,24 @@ public static class KeyboardLayout{
 	[DllImport("user32.dll")]
 	private static extern long GetKeyboardLayoutName(
 		System.Text.StringBuilder pwszKLID);
+	[DllImport("user32.dll")]
+	private static extern int GetKeyNameText(int lParam, StringBuilder lpString, int cchSize);
 	static private int layout;
 		
 	static KeyboardLayout(){
-		/*
-		StringBuilder name = new StringBuilder(9);
-		GetKeyboardLayoutName(name);
-		String KeyBoardLayout = name.ToString();
-		if (KeyBoardLayout == "00000407" || KeyBoardLayout == "00000807")
-			layout = QWERTZ;
-		else if (KeyBoardLayout == "0000040c" || KeyBoardLayout == "0000080c")
+		StringBuilder buffer = new StringBuilder(64);
+		int scanCode = 0x10;
+		int lParam = scanCode << 16;
+		GetKeyNameText(lParam, buffer, buffer.Capacity);
+		if(buffer.ToString()=="A")
 			layout = AZERTY;
-		else if (KeyBoardLayout == "00010409")
-			layout = DVORAK;
 		else
 			layout = QWERTY;
-		*/
-		
 	}
 	public static int getLayout(){
 		return layout;
 	}
 	public static bool isQwerty(){
-		return false;
+		return layout==QWERTY;
 	}
 }

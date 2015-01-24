@@ -5,8 +5,6 @@ using System.Collections;
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class Button : MonoBehaviour {
-	public Sprite[] buttonImages;
-
 	private string buttonName;
 	private Vector3 speed = Vector3.zero;
 	
@@ -22,7 +20,7 @@ public class Button : MonoBehaviour {
 	public void init(string buttonName, Vector3 speed){
 		this.buttonName = buttonName;
 		this.speed = speed;
-		spriteRenderer.sprite = buttonImages[(buttonName[0] - '1') * 9 + (buttonName[2] - '1')];
+		spriteRenderer.sprite = ButtonMap.spriteForButton(buttonName);
 	}
 	public string getButtonName(){
 		return buttonName;

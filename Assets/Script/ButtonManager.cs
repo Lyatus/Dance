@@ -14,7 +14,6 @@ public class ButtonManager : MonoBehaviour {
 	IEnumerator correctMappingCoroutine(){
 		while(true){
 			correctMappingProb *= correctMappingModifier;
-			Debug.Log (correctMappingProb);
 			yield return new WaitForSeconds(1f);
 		}
 	}

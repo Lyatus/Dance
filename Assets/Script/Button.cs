@@ -12,10 +12,17 @@ public class Button : MonoBehaviour {
 
 	private string buttonName;
 	private Vector3 speed = Vector3.zero;
+	private ButtonZone buttonZone;
+	private bool failed = false;
+	
+	void Start(){
+		buttonZone = GameObject.Find("ButtonZone").GetComponent<ButtonZone>();
+	}
 	
 	void Update(){
-		if(speed.x<0 &&transform.position.x<-failDistance
-	   	|| speed.x>0 && transform.position.x>failDistance)
+		if(!failed
+		&& (speed.x<0 &&transform.position.x<-failDistance
+	   	|| speed.x>0 && transform.position.x>failDistance))
 			failure();
 	   	transform.position += speed * Time.deltaTime;
 	}
@@ -29,6 +36,7 @@ public class Button : MonoBehaviour {
 		return buttonName;
 	}
 	public void success(){
+		buttonZone.success();
 		StartCoroutine(successCoroutine());
 	}
 	IEnumerator successCoroutine(){
@@ -41,6 +49,8 @@ public class Button : MonoBehaviour {
 		yield break;
 	}
 	public void failure(){
+		failed = true;
+		buttonZone.failure();
 		StartCoroutine(failureCoroutine());
 	}
 	IEnumerator failureCoroutine(){

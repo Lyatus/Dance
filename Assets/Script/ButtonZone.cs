@@ -4,8 +4,16 @@ using System.Collections.Generic;
 
 [RequireComponent(typeof(Collider))]
 public class ButtonZone : MonoBehaviour {
+	public int progressStatus;
+	public int regressStatus;
+
 	private Dictionary<string,HashSet<Button>> currentButtons = new Dictionary<string,HashSet<Button>>();
+	private SuicideManager suicideManager;
+	private int status = 0;
 	
+	void Start(){
+		suicideManager = GameObject.Find("CvsSuicide").GetComponent<SuicideManager>();
+	}
 	void Update () {
 		if(Time.timeScale>0f)
 			for(int i=1;i<=2;i++)
@@ -42,5 +50,17 @@ public class ButtonZone : MonoBehaviour {
 		else buttons = new HashSet<Button>();
 		currentButtons.Add(name,buttons);
 		return buttons;
+	}
+	public void success(){
+		if(++status==progressStatus){
+			suicideManager.winLife();
+			status = 0;
+		}
+	}
+	public void failure(){
+		if(--status==regressStatus){
+			suicideManager.lostLife();
+			status = 0;
+		}
 	}
 }

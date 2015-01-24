@@ -20,7 +20,6 @@ public class BeatFinder : MonoBehaviour {
 	private float[] samplesL, samplesR;
 	private Queue<float> previousEnergies = new Queue<float>();
 	private float timeBeforeKey;
-	private int sampleRate;
 
 	private AudioSource musicBeater;
 	private AudioSource musicReader;
@@ -50,8 +49,6 @@ public class BeatFinder : MonoBehaviour {
 
 		samplesL = new float[qSamples];
 		samplesR = new float[qSamples];
-
-		sampleRate = AudioSettings.outputSampleRate;
 
 		timeBeforeKey = Time.time + timeBetweenKey;
 	}

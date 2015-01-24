@@ -1,24 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BeatFinder : MonoBehaviour {
 
 	public ButtonManager bm;
-	public int qSamples = 1024;
+	public int qSamples = 2096;
 	public float bias = 0.02f; //mini Amplitude to extract pitch
 	public float delay = 0f;
-	public int selectedPitch = 120;
 
 
 	public float easyMode = 1f;
 	public float mediumMode = 0.8f;
 	public float hardMode = 0.5f;
 	private float timeBetweenKey;
-	//public float timeTweeker = 0.1f;
-	//public int percent = 50; 
+	public float threshold = 1.7f;
+	public int savedFrames = 60; 
 
 	private float[] samplesL, samplesR;
-	private float /*sum,*/ oldRms, newRms, timeBeforeKey, maxSum, fSample;
+	private Queue<float> previousEnergies = new Queue<float>();
+	private float timeBeforeKey;
+	private int sampleRate;
 
 	private AudioSource musicBeater;
 	private AudioSource musicReader;
@@ -42,20 +44,14 @@ public class BeatFinder : MonoBehaviour {
 		Debug.Log (timeBetweenKey + " " + musicBeater.clip.name);
 
 		musicReader = gameObject.AddComponent<AudioSource> ();
-		//musicReader = gameObject.GetComponentInChildren<AudioSource> ();
 		musicReader.clip = musicBeater.clip;
 		musicReader.PlayDelayed(delay);
-
 		musicBeater.volume = 0;
-
 
 		samplesL = new float[qSamples];
 		samplesR = new float[qSamples];
 
-		oldRms = 0; maxSum = 0;
-		fSample = AudioSettings.outputSampleRate;
-
-
+		sampleRate = AudioSettings.outputSampleRate;
 
 		timeBeforeKey = Time.time + timeBetweenKey;
 	}
@@ -69,69 +65,29 @@ public class BeatFinder : MonoBehaviour {
 		} else if(Time.timeScale >0 && !musicBeater.isPlaying){
 			musicBeater.Play();
 			musicReader.Play ();
-				}
+		}
 
 		musicBeater.GetSpectrumData (samplesL, 0, FFTWindow.BlackmanHarris);
 		musicBeater.GetSpectrumData (samplesR, 1, FFTWindow.BlackmanHarris);
 
-		float[] sum = new float[qSamples];
-
-		for (int i = 0; i < qSamples; i++) {
-			sum[i] = (Mathf.Abs(samplesL[i])+Mathf.Abs(samplesR[i]))/2;
+		float energy = 0;
+		for (int i = 0; i < qSamples/4; i++) {
+			energy += (samplesL[i]+samplesR[i])/2f;
 		}
-
-		float maxV = 0;
-		int maxN = 0;
-
-		for (int i=0; i < qSamples; i++){ // find max 
-			if (sum[i] > maxV && sum[i] > bias){
-				maxV = sum[i];
-				maxN = i; // maxN is the index of max
-			}
-		}
-
-		float freqN = maxN; // pass the index to a float variable
-		if (maxN > 0 && maxN < qSamples-1){ // interpolate index using neighbours
-			float dL = sum[maxN-1]/sum[maxN];
-			float dR = sum[maxN+1]/sum[maxN];
-			freqN += 0.5f*(dR*dR - dL*dL);
-		}
-		float pitchValue = freqN*(fSample/2)/qSamples;
-
-		//Debug.Log (timeBeforeKey+" "+Time.time);
-
-		if (timeBeforeKey < Time.time && pitchValue > selectedPitch) {
+		
+		
+		if (timeBeforeKey < Time.time && energy > getAverageEnergy()*1.7f) {
 			bm.beat(delay);
 			timeBeforeKey = Time.time + timeBetweenKey;
-				}
-
-		/*musicBeater.GetOutputData (samplesL, 0);
-		musicBeater.GetOutputData (samplesR, 1);
-		sum = 0.0f;
-
-		for (int i = 0; i < qSamplesLow; i++) {
-			sum += (Mathf.Abs(samplesL[i])+Mathf.Abs(samplesR[i]));
 		}
-		newRms = sum / (qSamples*2);
-
-		if (timeBeforeTweek > Time.time) {
-			timeBeforeTweek = Time.time + timeTweeker;
-			
-			if(newRms-oldRms > maxSum)
-				maxSum = newRms-oldRms;
-		}
-
-		if((newRms-oldRms)>(maxSum*percent/100))
-			Debug.Log ("bing");
-
-		if (timeBeforeTweek > Time.time) {
-			timeBeforeTweek = Time.time + timeTweeker;
-			
-			if(newRms-oldRms > maxSum){
-				maxSum = newRms-oldRms;
-			}
-		}*/
-
-		oldRms = newRms;
+		previousEnergies.Enqueue(energy);
+		if(previousEnergies.Count>60)
+			previousEnergies.Dequeue();
+	}
+	float getAverageEnergy(){
+		float wtr = 0;
+		foreach(float energy in previousEnergies)
+			wtr += energy;
+		return wtr/previousEnergies.Count;
 	}
 }

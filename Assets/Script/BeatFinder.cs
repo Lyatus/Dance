@@ -46,8 +46,8 @@ public class BeatFinder : MonoBehaviour {
 	void Update () {
 
 		if (Time.timeScale == 0 && musicBeater.isPlaying) {
-						musicBeater.Pause ();
-						musicReader.Pause ();
+			musicBeater.Pause ();
+			musicReader.Pause ();
 		} else if(Time.timeScale >0 && !musicBeater.isPlaying){
 			musicBeater.Play();
 			musicReader.Play ();

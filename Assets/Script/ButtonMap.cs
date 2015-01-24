@@ -7,7 +7,6 @@ using System.Collections.Generic;
 public static class ButtonMap {		
 	static private SortedDictionary<string,string> buttonKeys = new SortedDictionary<string, string>();
 	static private SortedDictionary<string,Sprite> buttonSprites = new SortedDictionary<string, Sprite>();
-	static private Sprite poofSprite;
 	
 	static ButtonMap(){
 		bool qwerty = KeyboardLayout.isQwerty();
@@ -34,7 +33,6 @@ public static class ButtonMap {
 		foreach(KeyValuePair<string,string> pair in buttonKeys)
 			buttonSprites.Add(pair.Key,AssetDatabase.LoadAssetAtPath("Assets/Image/Key/"+pair.Value+".png", typeof(Sprite)) as Sprite);
 		
-		poofSprite = AssetDatabase.LoadAssetAtPath("Assets/Image/Key/poof.png", typeof(Sprite)) as Sprite;
 	}
 	public static string keyForButton(string button){
 		string wtr;
@@ -47,8 +45,5 @@ public static class ButtonMap {
 		if(buttonSprites.TryGetValue(button,out wtr))
 			return wtr;
 		else throw new Exception("That button doesn't exit");
-	}
-	public static Sprite spriteForPoof(){
-		return poofSprite;
 	}
 }

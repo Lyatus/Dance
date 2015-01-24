@@ -14,11 +14,11 @@ public class ButtonZone : MonoBehaviour {
 						HashSet<Button> buttons = getCurrentButtons(i+"_"+j);
 						if(buttons!=null && buttons.Count>0){
 							foreach(Button button in buttons){
-								button.disappear();
+								button.success();
 							}
 							buttons.Clear();
 						}
-						else Debug.Log("NO");
+						else GetComponent<AudioSource>().Play();
 					}
 					
 	}

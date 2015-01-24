@@ -6,13 +6,19 @@ using System.Collections;
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class Button : MonoBehaviour {
-	public float poofDelay;
+	public float disappearDelay;
+	public Sprite poofSprite;
+	public Sprite failSprite;
+	public float failDistance;
 
 	private string buttonName;
 	private Vector3 speed = Vector3.zero;
 	
 	void Update(){
-		transform.position += speed * Time.deltaTime;
+		if(speed.x<0 &&transform.position.x<-failDistance
+	   	|| speed.x>0 && transform.position.x>failDistance)
+			disappear(failSprite);
+	   	transform.position += speed * Time.deltaTime;
 	}
 	public void init(string buttonName, Vector3 speed){
 		this.buttonName = buttonName;
@@ -23,13 +29,19 @@ public class Button : MonoBehaviour {
 	public string getButtonName(){
 		return buttonName;
 	}
-	public void disappear(){
-		StartCoroutine(disappearCoroutine());
+	public void success(){
+		disappear(poofSprite);
 	}
-	IEnumerator disappearCoroutine(){
+	public void failure(){
+		disappear(failSprite);
+	}
+	void disappear(Sprite sprite){
+		StartCoroutine(disappearCoroutine(sprite));
+	}
+	IEnumerator disappearCoroutine(Sprite sprite){
 		GetComponent<AudioSource>().Play();
-		GetComponent<SpriteRenderer>().sprite = ButtonMap.spriteForPoof();
-		yield return new WaitForSeconds(poofDelay);
+		GetComponent<SpriteRenderer>().sprite = sprite;
+		yield return new WaitForSeconds(disappearDelay);
 		Destroy(gameObject);
 		yield break;
 	}

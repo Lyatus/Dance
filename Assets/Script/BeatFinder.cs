@@ -83,8 +83,8 @@ public class BeatFinder : MonoBehaviour {
 		//Debug.Log (timeBeforeKey+" "+Time.time);
 
 		if (timeBeforeKey < Time.time && pitchValue > selectedPitch) {
-			//bm.beat(delay);
-			Debug.Log("ping");
+			bm.beat(delay);
+			//Debug.Log("ping");
 			timeBeforeKey = Time.time + timeBetweenKey;
 				}
 

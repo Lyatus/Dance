@@ -6,10 +6,6 @@ public class ButtonManager : MonoBehaviour {
 	public float speed;
 	public float zoneDistance;
 	
-	IEnumerator Start(){
-		yield return new WaitForSeconds(10f);
-		Time.timeScale = 0;
-	}
 	public void createButton(Vector3 position, string buttonName, Vector3 speed){
 		GameObject button = Instantiate(buttonPrefab) as GameObject;
 		button.GetComponent<Button>().init(buttonName,speed);

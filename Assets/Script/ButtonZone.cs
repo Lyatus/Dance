@@ -4,17 +4,19 @@ using System.Collections.Generic;
 
 [RequireComponent(typeof(Collider))]
 public class ButtonZone : MonoBehaviour {
-	private Dictionary<string,Button> currentButtons = new Dictionary<string,Button>();
+	private Dictionary<string,HashSet<Button>> currentButtons = new Dictionary<string,HashSet<Button>>();
 	
 	void Update () {
 		if(Time.timeScale>0f)
 			for(int i=1;i<=2;i++)
 				for(int j=1;j<=9;j++)
 					if(Input.GetKeyDown(ButtonMap.keyForButton(i+"_"+j))){
-						Button button;
-						if(currentButtons.TryGetValue(i+"_"+j,out button)){
-							currentButtons.Remove(i+"_"+j);
-							button.disappear();
+						HashSet<Button> buttons = getCurrentButtons(i+"_"+j);
+						if(buttons!=null && buttons.Count>0){
+							foreach(Button button in buttons){
+								button.disappear();
+							}
+							buttons.Clear();
 						}
 						else Debug.Log("NO");
 					}
@@ -23,10 +25,19 @@ public class ButtonZone : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D c){
 		Button button = c.gameObject.GetComponent<Button>();
 		if(button != null) // A button is entering the button zone
-			currentButtons.Add(button.getButtonName(),button);
+			getCurrentButtons(button.getButtonName()).Add(button);
 	}
 	void OnTriggerExit2D(Collider2D c){
-		if(c.gameObject.GetComponent<Button>() != null) // A button is exiting the button zone
-			currentButtons.Remove(c.gameObject.GetComponent<Button>().getButtonName());
+		Button button = c.gameObject.GetComponent<Button>();
+		if(button != null) // A button is exiting the button zone
+			getCurrentButtons(button.getButtonName()).Clear();
+	}
+	HashSet<Button> getCurrentButtons(string name){
+		HashSet<Button> buttons;
+		if(currentButtons.TryGetValue(name,out buttons))
+			return buttons;
+		else buttons = new HashSet<Button>();
+		currentButtons.Add(name,buttons);
+		return buttons;
 	}
 }

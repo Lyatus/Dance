@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -25,5 +26,13 @@ public class Button : MonoBehaviour {
 	public string getButtonName(){
 		return buttonName;
 	}
-	
+	public void disappear(){
+		StartCoroutine(disappearCoroutine());
+	}
+	IEnumerator disappearCoroutine(){
+		spriteRenderer.sprite = ButtonMap.spriteForPoof();
+		yield return new WaitForSeconds(.1f);
+		Destroy(gameObject);
+		yield break;
+	}
 }

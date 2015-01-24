@@ -9,7 +9,11 @@ public class BeatFinder : MonoBehaviour {
 	public float delay = 0f;
 	public int selectedPitch = 120;
 
-	public float timeBetweenKey = 0.2f;
+
+	public float easyMode = 1f;
+	public float mediumMode = 0.8f;
+	public float hardMode = 0.5f;
+	private float timeBetweenKey;
 	//public float timeTweeker = 0.1f;
 	//public int percent = 50; 
 
@@ -23,6 +27,20 @@ public class BeatFinder : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		musicBeater = GetComponent<AudioSource> ();
+		StartManager sm = GameObject.Find ("StartManager").GetComponent<StartManager> ();
+		musicBeater.clip = sm.getSelectedMusic ();
+
+		switch (sm.getSelectedDifficulty()) {
+		case 0 : timeBetweenKey = easyMode;
+			break;
+		case 1 : timeBetweenKey = mediumMode;
+			break;
+		case 2 : timeBetweenKey = hardMode;
+			break;
+		}
+
+		Debug.Log (timeBetweenKey + " " + musicBeater.clip.name);
+
 		musicReader = gameObject.AddComponent<AudioSource> ();
 		//musicReader = gameObject.GetComponentInChildren<AudioSource> ();
 		musicReader.clip = musicBeater.clip;

@@ -7,16 +7,17 @@ public class ButtonZone : MonoBehaviour {
 	private Dictionary<string,Button> currentButtons = new Dictionary<string,Button>();
 	
 	void Update () {
-		for(int i=1;i<=2;i++)
-			for(int j=1;j<=9;j++)
-				if(Input.GetKeyDown(ButtonMap.keyForButton(i+"_"+j))){
-					Button button;
-					if(currentButtons.TryGetValue(i+"_"+j,out button)){
-						currentButtons.Remove(i+"_"+j);
-						button.disappear();
+		if(Time.timeScale>0f)
+			for(int i=1;i<=2;i++)
+				for(int j=1;j<=9;j++)
+					if(Input.GetKeyDown(ButtonMap.keyForButton(i+"_"+j))){
+						Button button;
+						if(currentButtons.TryGetValue(i+"_"+j,out button)){
+							currentButtons.Remove(i+"_"+j);
+							button.disappear();
+						}
+						else Debug.Log("NO");
 					}
-					else Debug.Log("NO");
-				}
 					
 	}
 	void OnTriggerEnter2D(Collider2D c){

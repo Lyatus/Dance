@@ -11,19 +11,13 @@ public class Button : MonoBehaviour {
 	private string buttonName;
 	private Vector3 speed = Vector3.zero;
 	
-	private SpriteRenderer spriteRenderer;
-	
-	void Start(){
-		spriteRenderer = GetComponent<SpriteRenderer>();
-		init("1_1", new Vector3(-1,0,0));
-	}
 	void Update(){
 		transform.position += speed * Time.deltaTime;
 	}
 	public void init(string buttonName, Vector3 speed){
 		this.buttonName = buttonName;
 		this.speed = speed;
-		spriteRenderer.sprite = ButtonMap.spriteForButton(buttonName);
+		GetComponent<SpriteRenderer>().sprite = ButtonMap.spriteForButton(buttonName);
 	}
 	public string getButtonName(){
 		return buttonName;
@@ -32,7 +26,7 @@ public class Button : MonoBehaviour {
 		StartCoroutine(disappearCoroutine());
 	}
 	IEnumerator disappearCoroutine(){
-		spriteRenderer.sprite = ButtonMap.spriteForPoof();
+		GetComponent<SpriteRenderer>().sprite = ButtonMap.spriteForPoof();
 		yield return new WaitForSeconds(poofDelay);
 		Destroy(gameObject);
 		yield break;

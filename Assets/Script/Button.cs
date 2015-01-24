@@ -6,6 +6,8 @@ using System.Collections;
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class Button : MonoBehaviour {
+	public float poofDelay;
+
 	private string buttonName;
 	private Vector3 speed = Vector3.zero;
 	
@@ -31,7 +33,7 @@ public class Button : MonoBehaviour {
 	}
 	IEnumerator disappearCoroutine(){
 		spriteRenderer.sprite = ButtonMap.spriteForPoof();
-		yield return new WaitForSeconds(.1f);
+		yield return new WaitForSeconds(poofDelay);
 		Destroy(gameObject);
 		yield break;
 	}

@@ -27,4 +27,7 @@ public class ButtonManager : MonoBehaviour {
 	public string randomButton(){
 		return Random.Range(1,3)+"_"+Random.Range(1,10);
 	}
+	public void beat(float delay){
+		
+	}
 }

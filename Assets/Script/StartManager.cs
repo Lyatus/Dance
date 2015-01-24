@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEditor;
 using System.Collections;
 using System.IO;
@@ -13,6 +14,9 @@ public class StartManager : MonoBehaviour {
 	private int selectedIndexMusic;
 	private int selectedDifficulty;
 
+	private Text displaySelectedMusic;
+	private Text displaySelectedDifficulty;
+
 	void Awake () {
 		DontDestroyOnLoad (this);
 	}
@@ -22,8 +26,16 @@ public class StartManager : MonoBehaviour {
 		listingMusics(path);
 		selectedDifficulty = 1;
 		selectedIndexMusic = 0;
+
+		displaySelectedMusic = GameObject.Find("TextMusic").GetComponentInChildren<Text>();
+		displaySelectedDifficulty = GameObject.Find("TextDifficulty").GetComponentInChildren<Text>();
+
+		Debug.Log (displaySelectedMusic.text);
+
 		displayDifficulty ();
 		displayMusic ();
+
+
 	}
 	
 	// Update is called once per frame
@@ -69,18 +81,19 @@ public class StartManager : MonoBehaviour {
 
 	void displayDifficulty(){
 		switch (selectedDifficulty) {
-		case 0 :
+		case 0 : displaySelectedDifficulty.text = "Easy";
 			break;
-		case 1 : 
+		case 1 : displaySelectedDifficulty.text = "Medium";
 			break;
-		case 2 :
+		case 2 : displaySelectedDifficulty.text = "Hard";
 			break;
 				}
 	}
 
 	void displayMusic(){
 		selectedMusic = listMusics [selectedIndexMusic];
-		Debug.Log (selectedMusic.name);
+		displaySelectedMusic.text = selectedMusic.name;
+		//Debug.Log (selectedMusic.name);
 	}
 
 	void listingMusics(string pathMusic){

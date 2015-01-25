@@ -33,4 +33,7 @@ public static class KeyboardLayout{
 	public static bool isQwerty(){
 		return layout==QWERTY;
 	}
+	public static bool isAzerty(){
+		return layout==AZERTY;
+	}
 }

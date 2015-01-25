@@ -8,6 +8,8 @@ public class StartManager : MonoBehaviour {
 	//faire la liste des musiques dans le répertoire musique, remplir une liste et modifier la musique lu
 	public string path = "Assets/Music";
 
+	public Sprite tutoJ1Azerty, tutoJ2Azerty;
+
 	public AudioClip[] listMusics;
 	private AudioClip selectedMusic;
 	private int selectedIndexMusic;
@@ -33,7 +35,10 @@ public class StartManager : MonoBehaviour {
 		displayDifficulty ();
 		displayMusic ();
 
-
+		if(KeyboardLayout.isAzerty()){
+			GameObject.Find("TutoJ1").GetComponent<Image>().sprite = tutoJ1Azerty;
+			GameObject.Find("TutoJ2").GetComponent<Image>().sprite = tutoJ2Azerty;
+		}
 	}
 	
 	// Update is called once per frame

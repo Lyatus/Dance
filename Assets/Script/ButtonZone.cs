@@ -10,11 +10,13 @@ public class ButtonZone : MonoBehaviour {
 
 	private Dictionary<string,HashSet<Button>> currentButtons = new Dictionary<string,HashSet<Button>>();
 	private SuicideManager suicideManager;
+	private CopManager copManager;
 	private int status = 0;
 	private int missed = 0;
 	
 	void Start(){
 		suicideManager = GameObject.Find("CvsSuicide").GetComponent<SuicideManager>();
+		copManager = GameObject.Find("CopManager").GetComponent<CopManager>();
 	}
 	void Update () {
 		if(Time.timeScale>0f)
@@ -23,7 +25,9 @@ public class ButtonZone : MonoBehaviour {
 					if(Input.GetKeyDown(ButtonMap.keyForButton(i+"_"+j))){
 						HashSet<Button> buttons = getCurrentButtons(i+"_"+j);
 						if(buttons!=null && buttons.Count>0){
+							
 							foreach(Button button in buttons){
+								copManager.display(button.getPlayerId(),Random.Range(0,5));
 								moveStatus (button.getPointValue());
 								button.success();
 							}

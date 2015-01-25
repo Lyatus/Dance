@@ -1,0 +1,179 @@
+fileFormatVersion: 2
+guid: 9501b01b8ee693b4c80cd013455a2e3a
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: anim1_5
+    21300002: anim1_7
+    21300004: anim1_9
+    21300006: anim1_0
+    21300008: rien
+    21300010: anim1_3
+    21300012: anim1_4
+    21300014: anim1_6
+    21300016: anim1_8
+    21300018: anim1_10
+    21300020: anim1_1
+    21300022: anim1_2
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: anim1_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 581
+        width: 391
+        height: 577
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim1_7
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 581
+        width: 391
+        height: 577
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim1_9
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 581
+        width: 391
+        height: 577
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim1_0
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 581
+        width: 391
+        height: 577
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rien
+      rect:
+        serializedVersion: 2
+        x: 1564
+        y: 581
+        width: 391
+        height: 577
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim1_3
+      rect:
+        serializedVersion: 2
+        x: 1955
+        y: 581
+        width: 391
+        height: 577
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim1_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4
+        width: 391
+        height: 577
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim1_6
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 4
+        width: 391
+        height: 577
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim1_8
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 4
+        width: 391
+        height: 577
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim1_10
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 4
+        width: 391
+        height: 577
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim1_1
+      rect:
+        serializedVersion: 2
+        x: 1564
+        y: 4
+        width: 391
+        height: 577
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: anim1_2
+      rect:
+        serializedVersion: 2
+        x: 1955
+        y: 4
+        width: 391
+        height: 577
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

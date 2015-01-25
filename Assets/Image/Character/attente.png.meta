@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6d134c9ee01e1744ea3a7e3d34c6f03e
+guid: 584479627836a03488e9dc9532294549
 TextureImporter:
   fileIDToRecycleName:
     21300000: attente_0
@@ -8,11 +8,6 @@ TextureImporter:
     21300006: attente_3
     21300008: attente_4
     21300010: attente_5
-    21300012: attente_6
-    21300014: attente_7
-    21300016: attente_8
-    21300018: attente_9
-    21300020: attente_10
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -58,7 +53,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 500
         width: 298
         height: 524
       alignment: 0
@@ -68,7 +63,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 298
-        y: 0
+        y: 500
         width: 298
         height: 524
       alignment: 0
@@ -78,7 +73,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 596
-        y: 0
+        y: 500
         width: 298
         height: 524
       alignment: 0
@@ -88,7 +83,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 894
-        y: 0
+        y: 500
         width: 298
         height: 524
       alignment: 0
@@ -98,7 +93,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1192
-        y: 0
+        y: 500
         width: 298
         height: 524
       alignment: 0
@@ -108,57 +103,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1490
-        y: 0
-        width: 298
-        height: 524
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: attente_6
-      rect:
-        serializedVersion: 2
-        x: 1788
-        y: 0
-        width: 298
-        height: 524
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: attente_7
-      rect:
-        serializedVersion: 2
-        x: 2086
-        y: 0
-        width: 298
-        height: 524
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: attente_8
-      rect:
-        serializedVersion: 2
-        x: 2384
-        y: 0
-        width: 298
-        height: 524
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: attente_9
-      rect:
-        serializedVersion: 2
-        x: 2682
-        y: 0
-        width: 298
-        height: 524
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: attente_10
-      rect:
-        serializedVersion: 2
-        x: 2980
-        y: 0
+        y: 500
         width: 298
         height: 524
       alignment: 0

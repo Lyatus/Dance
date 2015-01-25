@@ -60,7 +60,7 @@ public class BeatFinder : MonoBehaviour {
 
 		timeBeforeKey = Time.time + timeBetweenKey;
 		
-		EndTime = Time.time + musicReader.clip.length + delay;
+		EndTime = Time.time + musicReader.clip.length;
 	}
 	
 	// Update is called once per frame

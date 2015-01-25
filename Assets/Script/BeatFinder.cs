@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -9,6 +10,7 @@ public class BeatFinder : MonoBehaviour {
 	public float bias = 0.02f; //mini Amplitude to extract pitch
 	public float delay = 0f;
 
+	private Slider progress;
 
 	public float easyMode = 1f;
 	public float mediumMode = 0.8f;
@@ -21,7 +23,8 @@ public class BeatFinder : MonoBehaviour {
 	private Queue<float> previousEnergies = new Queue<float>();
 	private float timeBeforeKey;
 
-	private float EndTime;
+	private float startTime;
+	private float endTime;
 
 	private AudioSource musicBeater;
 	private AudioSource musicReader;
@@ -59,8 +62,12 @@ public class BeatFinder : MonoBehaviour {
 		samplesR = new float[qSamples];
 
 		timeBeforeKey = Time.time + timeBetweenKey;
-		
-		EndTime = Time.time + musicReader.clip.length;
+
+		startTime = Time.time;
+		endTime = Time.time + musicReader.clip.length;
+
+		progress = GameObject.Find ("CnvProgress").GetComponentInChildren<Slider> ();
+		progress.value = 0;
 	}
 	
 	// Update is called once per frame
@@ -74,7 +81,7 @@ public class BeatFinder : MonoBehaviour {
 				musicReader.Play ();
 		}
 
-		if (EndTime < Time.time) {
+		if (endTime < Time.time) {
 			Application.LoadLevel("overGameWin");
 		}
 
@@ -94,11 +101,18 @@ public class BeatFinder : MonoBehaviour {
 		previousEnergies.Enqueue(energy);
 		if(previousEnergies.Count>60)
 			previousEnergies.Dequeue();
+
+		Debug.Log (progression ());
+		progress.value = progression ();
 	}
 	float getAverageEnergy(){
 		float wtr = 0;
 		foreach(float energy in previousEnergies)
 			wtr += energy;
 		return wtr/previousEnergies.Count;
+	}
+
+	public float progression(){
+		return ((Time.time-startTime)/(endTime-startTime))*100;
 	}
 }

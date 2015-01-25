@@ -22,9 +22,10 @@ public class SuicideManager : MonoBehaviour {
 
 	public void lostLife(){
 		if (etatSuicide > -3)
-						etatSuicide--;
-				else
-						Application.LoadLevel ("overGameLost");
+			etatSuicide--;
+		else {
+			Application.LoadLevel ("overGameLost");
+		}
 
 		displaySuicideStats ();
 	}

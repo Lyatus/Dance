@@ -14,7 +14,7 @@ public class OverGameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (timeBeforeResetValue < Time.time) {
+		if (timeBeforeReset < Time.time) {
 			Application.LoadLevel(0);
 		}
 	}

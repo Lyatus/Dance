@@ -29,8 +29,14 @@ public class BeatFinder : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 		musicBeater = GetComponent<AudioSource> ();
-		StartManager sm = GameObject.Find ("StartManager").GetComponent<StartManager> ();
+		GameObject smgo = GameObject.Find ("StartManager");
+		if (smgo == null) {
+			Application.LoadLevel(0);
+		}
+		StartManager sm = smgo.GetComponent<StartManager> ();
+
 		musicBeater.clip = sm.getSelectedMusic ();
 
 		switch (sm.getSelectedDifficulty()) {

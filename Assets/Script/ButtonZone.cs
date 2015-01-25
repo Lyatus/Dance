@@ -53,7 +53,7 @@ public class ButtonZone : MonoBehaviour {
 		return buttons;
 	}
 	public void success(int point){
-		status += point
+		status += point;
 		if(status==progressStatus){
 			suicideManager.winLife();
 			status = 0;

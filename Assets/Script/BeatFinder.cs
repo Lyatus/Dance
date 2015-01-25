@@ -21,6 +21,8 @@ public class BeatFinder : MonoBehaviour {
 	private Queue<float> previousEnergies = new Queue<float>();
 	private float timeBeforeKey;
 
+	private float EndTime;
+
 	private AudioSource musicBeater;
 	private AudioSource musicReader;
 	private AudioLowPassFilter filter;
@@ -51,17 +53,23 @@ public class BeatFinder : MonoBehaviour {
 		samplesR = new float[qSamples];
 
 		timeBeforeKey = Time.time + timeBetweenKey;
+		
+		EndTime = Time.time + musicReader.clip.length + delay;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
 		if (Time.timeScale == 0 && musicBeater.isPlaying) {
-			musicBeater.Pause ();
-			musicReader.Pause ();
-		} else if(Time.timeScale >0 && !musicBeater.isPlaying){
-			musicBeater.Play();
-			musicReader.Play ();
+				musicBeater.Pause ();
+				musicReader.Pause ();
+		} else if (Time.timeScale > 0 && !musicBeater.isPlaying) {
+				musicBeater.Play ();
+				musicReader.Play ();
+		}
+
+		if (EndTime < Time.time) {
+			Application.LoadLevel("overGameWin");
 		}
 
 		musicBeater.GetSpectrumData (samplesL, 0, FFTWindow.BlackmanHarris);

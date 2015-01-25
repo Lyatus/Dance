@@ -15,6 +15,7 @@ public class OverGameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (timeBeforeReset < Time.time) {
+			Destroy(GameObject.Find("StartManager"));
 			Application.LoadLevel(0);
 		}
 	}

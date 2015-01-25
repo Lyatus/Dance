@@ -36,7 +36,6 @@ public class Button : MonoBehaviour {
 		return buttonName;
 	}
 	public void success(){
-		buttonZone.success();
 		StartCoroutine(successCoroutine());
 	}
 	IEnumerator successCoroutine(){
@@ -67,5 +66,11 @@ public class Button : MonoBehaviour {
 	}
 	public int getPlayerId(){
 		return (transform.localPosition.y>0)?0:1;
+	}
+	public int getPointValue(){
+		if((transform.localPosition.x>0 && transform.localPosition.y<0)
+		|| (transform.localPosition.x<0 && transform.localPosition.y>0))
+	   		return 1;
+	   	else return 0;
 	}
 }

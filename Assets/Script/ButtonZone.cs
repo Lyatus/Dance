@@ -21,8 +21,10 @@ public class ButtonZone : MonoBehaviour {
 					if(Input.GetKeyDown(ButtonMap.keyForButton(i+"_"+j))){
 						HashSet<Button> buttons = getCurrentButtons(i+"_"+j);
 						if(buttons!=null && buttons.Count>0){
-							foreach(Button button in buttons)
+							foreach(Button button in buttons){
+								success (button.getPointValue());
 								button.success();
+							}
 							buttons.Clear();
 						}
 					}
@@ -50,8 +52,9 @@ public class ButtonZone : MonoBehaviour {
 		currentButtons.Add(name,buttons);
 		return buttons;
 	}
-	public void success(){
-		if(++status==progressStatus){
+	public void success(int point){
+		status += point
+		if(status==progressStatus){
 			suicideManager.winLife();
 			status = 0;
 		}

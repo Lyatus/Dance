@@ -23,6 +23,8 @@ public class BeatFinder : MonoBehaviour {
 	private Queue<float> previousEnergies = new Queue<float>();
 	private float timeBeforeKey;
 
+	private Image bouleAFacette;
+
 	private float startTime;
 	private float endTime;
 
@@ -51,8 +53,6 @@ public class BeatFinder : MonoBehaviour {
 			break;
 		}
 
-		Debug.Log (timeBetweenKey + " " + musicBeater.clip.name);
-
 		musicReader = gameObject.AddComponent<AudioSource> ();
 		musicReader.clip = musicBeater.clip;
 		musicReader.PlayDelayed(delay);
@@ -68,6 +68,8 @@ public class BeatFinder : MonoBehaviour {
 
 		progress = GameObject.Find ("CnvProgress").GetComponentInChildren<Slider> ();
 		progress.value = 0;
+
+		bouleAFacette = GameObject.Find ("BouleAFacette").GetComponent<Image> ();
 	}
 	
 	// Update is called once per frame
@@ -102,8 +104,9 @@ public class BeatFinder : MonoBehaviour {
 		if(previousEnergies.Count>60)
 			previousEnergies.Dequeue();
 
-		Debug.Log (progression ());
 		progress.value = progression ();
+		bouleAFacette.rectTransform.Rotate(new Vector3(0,0,-0.3f));
+
 	}
 	float getAverageEnergy(){
 		float wtr = 0;

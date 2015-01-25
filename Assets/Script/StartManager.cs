@@ -111,4 +111,8 @@ public class StartManager : MonoBehaviour {
 	public int getSelectedDifficulty(){
 		return selectedDifficulty;
 	}
+
+	public void quit(){
+		Application.Quit ();
+	}
 }

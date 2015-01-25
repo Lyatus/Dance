@@ -32,4 +32,8 @@ public class UImanager : MonoBehaviour {
 		Destroy(GameObject.Find("StartManager"));
 		Application.LoadLevel("startGame");
 	}
+
+	public void quit() {
+		Application.Quit();
+	}
 }

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 using System.Collections;
 using System.IO;
 
@@ -9,7 +8,7 @@ public class StartManager : MonoBehaviour {
 	//faire la liste des musiques dans le répertoire musique, remplir une liste et modifier la musique lu
 	public string path = "Assets/Music";
 
-	private AudioClip[] listMusics;
+	public AudioClip[] listMusics;
 	private AudioClip selectedMusic;
 	private int selectedIndexMusic;
 	private int selectedDifficulty;
@@ -23,7 +22,6 @@ public class StartManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		listingMusics(path);
 		selectedDifficulty = 1;
 		selectedIndexMusic = 0;
 
@@ -96,16 +94,6 @@ public class StartManager : MonoBehaviour {
 		//Debug.Log (selectedMusic.name);
 	}
 
-	void listingMusics(string pathMusic){
-		DirectoryInfo dir = new DirectoryInfo(pathMusic);
-		FileInfo[] musics = dir.GetFiles("*.mp3");
-
-		listMusics = new AudioClip[musics.Length];
-
-		for (int i=0; i<musics.Length; i++) {
-			listMusics[i] =  AssetDatabase.LoadAssetAtPath("Assets/Music/"+musics[i].Name, typeof(AudioClip)) as AudioClip;
-		}
-	}
 
 	public void play(){
 		Application.LoadLevel(2);

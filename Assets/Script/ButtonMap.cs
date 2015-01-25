@@ -1,15 +1,37 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public static class ButtonMap {		
-	static private SortedDictionary<string,string> buttonKeys = new SortedDictionary<string, string>();
-	static private SortedDictionary<string,Sprite> buttonSprites = new SortedDictionary<string, Sprite>();
+public class ButtonMap : MonoBehaviour{		
+	static private SortedDictionary<string,string> buttonKeys;
+	static private SortedDictionary<string,Sprite> buttonSprites;
+	public Sprite aSprite;
+	public Sprite bSprite;
+	public Sprite cSprite;
+	public Sprite dSprite;
+	public Sprite eSprite;
+	public Sprite fSprite;
+	public Sprite gSprite;
+	public Sprite hSprite;
+	public Sprite nSprite;
+	public Sprite qSprite;
+	public Sprite rSprite;
+	public Sprite sSprite;
+	public Sprite tSprite;
+	public Sprite vSprite;
+	public Sprite wSprite;
+	public Sprite xSprite;
+	public Sprite ySprite;
+	public Sprite zSprite;
 	
-	static ButtonMap(){
+	void Start(){
 		bool qwerty = KeyboardLayout.isQwerty();
+		if(buttonKeys!=null)
+			return;
+	
+		buttonKeys = new SortedDictionary<string, string>();
+		buttonSprites = new SortedDictionary<string, Sprite>();
 
 		buttonKeys.Add("1_1",(qwerty)?"z":"w");
 		buttonKeys.Add("1_2","x");
@@ -30,9 +52,24 @@ public static class ButtonMap {
 		buttonKeys.Add("2_8","t");
 		buttonKeys.Add("2_9","y");
 		
-		foreach(KeyValuePair<string,string> pair in buttonKeys)
-			buttonSprites.Add(pair.Key,AssetDatabase.LoadAssetAtPath("Assets/Image/Key/"+pair.Value+".png", typeof(Sprite)) as Sprite);
-		
+		buttonSprites.Add("1_1",(qwerty)?zSprite:wSprite);
+		buttonSprites.Add("1_2",xSprite);
+		buttonSprites.Add("1_3",cSprite);
+		buttonSprites.Add("1_4",(qwerty)?aSprite:qSprite);
+		buttonSprites.Add("1_5",sSprite);
+		buttonSprites.Add("1_6",dSprite);
+		buttonSprites.Add("1_7",(qwerty)?qSprite:aSprite);
+		buttonSprites.Add("1_8",(qwerty)?wSprite:zSprite);
+		buttonSprites.Add("1_9",eSprite);
+		buttonSprites.Add("2_1",vSprite);
+		buttonSprites.Add("2_2",bSprite);
+		buttonSprites.Add("2_3",nSprite);
+		buttonSprites.Add("2_4",fSprite);
+		buttonSprites.Add("2_5",gSprite);
+		buttonSprites.Add("2_6",hSprite);
+		buttonSprites.Add("2_7",rSprite);
+		buttonSprites.Add("2_8",tSprite);
+		buttonSprites.Add("2_9",ySprite);		
 	}
 	public static string keyForButton(string button){
 		string wtr;

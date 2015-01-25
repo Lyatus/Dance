@@ -74,6 +74,7 @@ public class ButtonZone : MonoBehaviour {
 		}
 	}
 	void miss(){
+		GetComponent<AudioSource>().Play();
 		if(++missed==missesPerPenalty){
 			missed = 0;
 			moveStatus(-1);

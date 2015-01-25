@@ -3,14 +3,25 @@ using System.Collections;
 
 public class ButtonManager : MonoBehaviour {
 	public GameObject buttonPrefab;
-	public float speed;
+	public float easySpeed;
+	public float mediumSpeed;
+	public float hardSpeed;
 	public float zoneDistance;
 	public float correctMappingModifier;
 	public float correctMappingProb;
 	public float lineYOffset;
+	private float speed;
 	
 	void Start(){
 		StartCoroutine(correctMappingCoroutine());
+		GameObject smgo = GameObject.Find("StartManager");
+		StartManager sm = smgo.GetComponent<StartManager> ();
+	
+		switch (sm.getSelectedDifficulty()) {
+			case 0 : speed = easySpeed; break;
+			case 1 : speed = mediumSpeed; break;
+			case 2 : speed = hardSpeed; break;
+		}
 	}
 	IEnumerator correctMappingCoroutine(){
 		while(true){

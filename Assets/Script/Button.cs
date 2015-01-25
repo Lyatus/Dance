@@ -49,7 +49,7 @@ public class Button : MonoBehaviour {
 	}
 	public void failure(){
 		failed = true;
-		buttonZone.failure();
+		buttonZone.moveStatus(-1);
 		StartCoroutine(failureCoroutine());
 	}
 	IEnumerator failureCoroutine(){

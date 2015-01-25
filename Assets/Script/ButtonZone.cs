@@ -6,10 +6,12 @@ using System.Collections.Generic;
 public class ButtonZone : MonoBehaviour {
 	public int progressStatus;
 	public int regressStatus;
+	public int missesPerPenalty;
 
 	private Dictionary<string,HashSet<Button>> currentButtons = new Dictionary<string,HashSet<Button>>();
 	private SuicideManager suicideManager;
 	private int status = 0;
+	private int missed = 0;
 	
 	void Start(){
 		suicideManager = GameObject.Find("CvsSuicide").GetComponent<SuicideManager>();
@@ -22,11 +24,12 @@ public class ButtonZone : MonoBehaviour {
 						HashSet<Button> buttons = getCurrentButtons(i+"_"+j);
 						if(buttons!=null && buttons.Count>0){
 							foreach(Button button in buttons){
-								success (button.getPointValue());
+								moveStatus (button.getPointValue());
 								button.success();
 							}
 							buttons.Clear();
 						}
+						else miss();
 					}
 					
 	}
@@ -52,17 +55,24 @@ public class ButtonZone : MonoBehaviour {
 		currentButtons.Add(name,buttons);
 		return buttons;
 	}
-	public void success(int point){
-		status += point;
+	public void moveStatus(int delta){
+		status += delta;
+		if(delta<0 && status>0)
+			status = 0;
+			
 		if(status==progressStatus){
 			suicideManager.winLife();
 			status = 0;
 		}
-	}
-	public void failure(){
-		if(--status==regressStatus){
+		else if(status==regressStatus){
 			suicideManager.lostLife();
 			status = 0;
+		}
+	}
+	void miss(){
+		if(++missed==missesPerPenalty){
+			missed = 0;
+			moveStatus(-1);
 		}
 	}
 }

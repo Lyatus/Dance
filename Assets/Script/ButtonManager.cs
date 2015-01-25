@@ -15,6 +15,7 @@ public class ButtonManager : MonoBehaviour {
 	void Start(){
 		StartCoroutine(correctMappingCoroutine());
 		GameObject smgo = GameObject.Find("StartManager");
+		if(smgo==null) return;
 		StartManager sm = smgo.GetComponent<StartManager> ();
 	
 		switch (sm.getSelectedDifficulty()) {
